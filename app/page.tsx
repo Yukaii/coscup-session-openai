@@ -104,7 +104,7 @@ export default function App() {
         })}
       >
         <h1 className="text-4xl font-bold">
-          COSCUP 2023 feat. OpenAI 議程搜尋系統
+          COSCUP 2023 x OpenAI 議程搜尋系統
         </h1>
 
         <label className="flex flex-col gap-1 items-center">
