@@ -46,8 +46,7 @@ export async function POST(req: Request) {
     match_count: 10, // Choose the number of matches
   });
 
-  const documentIds = documents.map((document) => document.id);
-
+  // const documentIds = documents.map((document) => document.id);
   // const sessions = await supabaseClient.from("sessions").select("*").in("id", documentIds);
 
   let tokenCount = 0;
