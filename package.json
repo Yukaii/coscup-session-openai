@@ -48,6 +48,8 @@
   "devDependencies": {
     "@types/common-tags": "^1.8.1",
     "@typescript-eslint/parser": "^6.2.0",
-    "eslint-plugin-tailwindcss": "^3.13.0"
+    "eslint-config-prettier": "^8.9.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
+    "prettier": "^3.0.0"
   }
 }
