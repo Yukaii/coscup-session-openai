@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, Fragment, useEffect, useState } from "react";
+import { createElement, Fragment, useEffect, useRef, useState } from "react";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
@@ -37,6 +37,15 @@ const randomPlaceLengthClasses = [
   "w-[100px] h-[20px]",
 ];
 
+const presetPrompts = [
+  "我想看關於 AI 的議程",
+  "我想看關於 Python 的議程",
+  "我想看關於 Rust 的議程",
+  "我想看關於 Go 的議程",
+  "有區塊鏈相關的議程嗎？",
+  "我想看關於資安的議程",
+];
+
 export default function App() {
   const {
     completion,
@@ -44,21 +53,36 @@ export default function App() {
     handleInputChange,
     handleSubmit,
     isLoading,
-    complete,
+    setInput,
   } = useCompletion({
     api: "/api/search",
   });
 
+  const formRef = useRef<HTMLFormElement>(null);
+
   const Content = useMarkdown(completion);
 
+  const onPresetClick = (prompt: string) => {
+    setInput(prompt);
+
+    window.setTimeout(() => {
+      handleSubmit({ preventDefault: () => null } as any);
+    }, 100);
+  };
+
+  const randomPresets = presetPrompts
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 3);
+
   return (
-    <div className="flex flex-col gap-6 justify-center items-center h-full pb-2 px-1 sm:px-0">
+    <div className="flex flex-col gap-6 justify-center items-center px-1 pb-2 h-full sm:px-0">
       <span className="fixed top-1 right-1">
         <ModeToggle />
       </span>
 
       <form
         onSubmit={handleSubmit}
+        ref={formRef}
         className={clsx("flex flex-col gap-6", {
           "justify-center": !completion,
           "pt-5 justify-around gap-6": completion,
@@ -78,6 +102,23 @@ export default function App() {
 
           <small className="text-muted-foreground">
             來問問關於今年 COSCUP 議程的一些事吧！
+            {!isLoading && !completion && (
+              <>
+                <br />
+                或是，試試以下幾種：
+                <ul className="list-disc list-inside">
+                  {randomPresets.map((prompt) => (
+                    <li
+                      className="underline cursor-pointer"
+                      key={prompt}
+                      onClick={() => onPresetClick(prompt)}
+                    >
+                      {prompt}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </small>
         </label>
       </form>
