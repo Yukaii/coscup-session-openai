@@ -2,7 +2,6 @@
 
 import { createElement, Fragment, useEffect, useState } from "react";
 import { unified } from "unified";
-import rehypeParse from "rehype-parse";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeReact from "rehype-react";
@@ -29,6 +28,14 @@ const useMarkdown = (markdown: string) => {
 
   return Content;
 };
+
+const randomPlaceLengthClasses = [
+  'w-[300px] h-[20px]',
+  'w-[250px] h-[20px]',
+  'w-[200px] h-[20px]',
+  'w-[150px] h-[20px]',
+  'w-[100px] h-[20px]',
+]
 
 export default function App() {
   const {
@@ -71,10 +78,27 @@ export default function App() {
         </label>
       </form>
 
-      {completion && <div className="px-4 w-full max-w-[800px] markdown-body max-h-[600px] overflow-auto">
-        <Content />
-      </div>
-      }
-    </div >
+      {/* placeholder */}
+      {isLoading && !completion && (
+        <div className="flex flex-col gap-2 justify-center animate-pulse">
+          {/* randomize text placeholder */}
+          {
+            new Array(Math.floor(Math.random() * 3) + 5).fill(0).map((i, index) => {
+              const randomLengthClass = randomPlaceLengthClasses[Math.floor(Math.random() * randomPlaceLengthClasses.length)]
+
+              return (
+                <div className={`bg-gray-300 rounded-lg ${randomLengthClass}`} key={`placeholder-${index}`} />
+              )
+            })
+          }
+        </div>
+      )}
+
+      {completion && (
+        <div className="overflow-auto px-4 w-full max-w-[800px] markdown-body max-h-[600px]">
+          <Content />
+        </div>
+      )}
+    </div>
   );
 }
