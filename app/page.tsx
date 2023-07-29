@@ -169,16 +169,6 @@ export default function App() {
         <div className="flex gap-2 justify-center items-center">
           <span className="text-sm text-muted-foreground">
             <a
-              href="https://github.com/Yukaii/coscup-session-openai"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          </span>
-
-          <span className="text-sm text-muted-foreground">
-            <a
               href="https://coscup.org/2023/"
               target="_blank"
               rel="noopener noreferrer"
@@ -189,11 +179,21 @@ export default function App() {
 
           <span className="text-sm text-muted-foreground">
             <a
+              href="https://github.com/Yukaii/coscup-session-openai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          </span>
+
+          <span className="text-sm text-muted-foreground">
+            <a
               href="https://yukai.dev"
               target="_blank"
               rel="noopener noreferrer"
             >
-              My Blog
+              Hi, I'm Yukai
             </a>
           </span>
         </div>
