@@ -52,7 +52,7 @@ export default function App() {
   const Content = useMarkdown(completion);
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center h-full pb-2">
+    <div className="flex flex-col gap-6 justify-center items-center h-full pb-2 px-1 sm:px-0">
       <span className="fixed top-1 right-1">
         <ModeToggle />
       </span>
