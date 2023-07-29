@@ -1,7 +1,8 @@
 "use client";
 
 import { createElement, Fragment, useEffect, useRef, useState } from "react";
-import { unified } from "unified";
+import { unified, Plugin } from "unified";
+import { visit } from 'unist-util-visit'
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeReact from "rehype-react";
@@ -11,6 +12,16 @@ import { Input } from "@/components/ui/input";
 import { ModeToggle } from "@/components/theme-toggle";
 import clsx from "clsx";
 
+const rehypeChangeHrefToTargetBlank: Plugin = () => {
+  return (tree: any) => {
+    visit(tree, "element", (node: any) => {
+      if (node.tagName !== "a") return;
+      node.properties.target = "_blank";
+      node.properties.rel = "noopener noreferrer";
+    });
+  };
+}
+
 const useMarkdown = (markdown: string) => {
   const [Content, setContent] = useState(Fragment as any);
 
@@ -18,6 +29,7 @@ const useMarkdown = (markdown: string) => {
     unified()
       .use(remarkParse)
       .use(remarkRehype)
+      .use(rehypeChangeHrefToTargetBlank)
       .use(remarkGfm)
       .use(rehypeReact, { createElement, Fragment })
       .process(markdown)
@@ -193,7 +205,7 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Hi, I'm Yukai
+              {`Hi, I'm Yukai`}
             </a>
           </span>
         </div>
