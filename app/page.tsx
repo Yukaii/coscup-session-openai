@@ -3,6 +3,7 @@
 
 import { useCompletion } from "ai/react";
 import clsx from "clsx";
+import Link from "next/link";
 import { createElement, Fragment, useEffect, useRef, useState } from "react";
 import rehypeReact from "rehype-react";
 import remarkGfm from "remark-gfm";
@@ -103,9 +104,9 @@ export default function App() {
 
             <small className="absolute -right-2 top-[18px] translate-x-[100%] text-muted-foreground">
               {(input || completion) && (
-                <a className="text-sm underline" onClick={clear} href="#">
+                <Link className="text-sm underline" onClick={clear} href="#">
                   清除搜尋結果
-                </a>
+                </Link>
               )}
             </small>
           </div>
@@ -152,21 +153,21 @@ export default function App() {
       <div className="fixed bottom-1 flex w-full flex-col items-center justify-center gap-2">
         <div className="flex items-center justify-center gap-2">
           <span className="text-sm text-muted-foreground">
-            <a href="https://coscup.org/2023/" target="_blank" rel="noopener noreferrer">
+            <Link href="https://coscup.org/2023/" target="_blank" rel="noopener noreferrer">
               COSCUP 2023
-            </a>
+            </Link>
           </span>
 
           <span className="text-sm text-muted-foreground">
-            <a href="https://github.com/Yukaii/coscup-session-openai" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/Yukaii/coscup-session-openai" target="_blank" rel="noopener noreferrer">
               GitHub
-            </a>
+            </Link>
           </span>
 
           <span className="text-sm text-muted-foreground">
-            <a href="https://yukai.dev" target="_blank" rel="noopener noreferrer">
+            <Link href="https://yukai.dev" target="_blank" rel="noopener noreferrer">
               {`Hi, I'm Yukai`}
-            </a>
+            </Link>
           </span>
         </div>
       </div>
