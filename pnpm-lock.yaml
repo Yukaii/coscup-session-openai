@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@supabase/supabase-js': ^2.31.0
+  '@types/common-tags': ^1.8.1
   '@types/node': 20.4.5
   '@types/react': 18.2.17
   '@types/react-dom': 18.2.7
@@ -49,6 +50,9 @@ dependencies:
   tailwindcss: 3.3.3
   tailwindcss-animate: 1.0.6_tailwindcss@3.3.3
   typescript: 5.1.6
+
+devDependencies:
+  '@types/common-tags': 1.8.1
 
 packages:
 
@@ -349,6 +353,10 @@ packages:
     dependencies:
       tslib: 2.6.1
     dev: false
+
+  /@types/common-tags/1.8.1:
+    resolution: {integrity: sha512-20R/mDpKSPWdJs5TOpz3e7zqbeCNuMCPhV7Yndk9KU2Rbij2r5W4RzwDPkzC+2lzUqXYu9rFzTktCBnDjHuNQg==}
+    dev: true
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
