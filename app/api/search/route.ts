@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         content: stripIndent`
         You are a AI assistant that helps people to find related sessions.
         Understand user prompt and come up with more related keywords for searching.
-        Output as comma separated keywords in both English and 繁體中文. Do not output duplicate keywords.
+        Output as comma separated keywords in both English and 繁體中文 in the same line. Do not output duplicate keywords.
       `,
       },
       {

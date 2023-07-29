@@ -38,13 +38,15 @@ const randomPlaceLengthClasses = [
 ];
 
 const presetPrompts = [
-  "我想看關於 AI 的議程",
-  "我想看關於 Python 的議程",
-  "我想看關於 Rust 的議程",
-  "我想看關於 Go 的議程",
-  "有區塊鏈相關的議程嗎？",
-  "我想看關於資安的議程",
+  "AI 的議程",
+  "Python 的議程",
+  "Rust 的議程",
+  "Go 的議程",
+  "區塊鏈相關",
+  "關於資安的議程",
 ];
+
+const randomPresets = presetPrompts.sort(() => Math.random() - 0.5).slice(0, 3);
 
 export default function App() {
   const {
@@ -54,6 +56,8 @@ export default function App() {
     handleSubmit,
     isLoading,
     setInput,
+    setCompletion,
+    complete,
   } = useCompletion({
     api: "/api/search",
   });
@@ -65,14 +69,13 @@ export default function App() {
   const onPresetClick = (prompt: string) => {
     setInput(prompt);
 
-    window.setTimeout(() => {
-      handleSubmit({ preventDefault: () => null } as any);
-    }, 100);
+    complete(prompt);
   };
 
-  const randomPresets = presetPrompts
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 3);
+  const clear = () => {
+    setCompletion("");
+    setInput("");
+  };
 
   return (
     <div className="flex flex-col gap-6 justify-center items-center px-1 pb-2 h-full sm:px-0">
@@ -93,12 +96,22 @@ export default function App() {
         </h1>
 
         <label className="flex flex-col gap-1 items-center">
-          <Input
-            className="py-6 px-4 max-w-full text-2xl w-[300px]"
-            placeholder="請輸入關鍵字"
-            value={input}
-            onChange={handleInputChange}
-          />
+          <div className="relative">
+            <Input
+              className="py-6 px-4 max-w-full text-2xl w-[300px]"
+              placeholder="請輸入關鍵字"
+              value={input}
+              onChange={handleInputChange}
+            />
+
+            <small className="text-muted-foreground absolute -right-2 translate-x-[100%] top-[18px]">
+              {(input || completion) && (
+                <a className="text-sm underline" onClick={clear} href="#">
+                  清除搜尋結果
+                </a>
+              )}
+            </small>
+          </div>
 
           <small className="text-muted-foreground">
             來問問關於今年 COSCUP 議程的一些事吧！
