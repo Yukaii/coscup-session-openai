@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./globals.scss";
 import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata = {
@@ -13,9 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        {children}
-      </ThemeProvider>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

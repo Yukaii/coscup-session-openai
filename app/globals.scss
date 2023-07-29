@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+html, body {
   height: 100%;
+}
+
+.markdown-body {
+  ul li {
+    @apply list-disc list-inside;
+  }
+
+  ol li {
+    @apply list-decimal list-inside;
+  }
 }
 
 @layer base {
