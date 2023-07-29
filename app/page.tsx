@@ -30,12 +30,12 @@ const useMarkdown = (markdown: string) => {
 };
 
 const randomPlaceLengthClasses = [
-  'w-[300px] h-[20px]',
-  'w-[250px] h-[20px]',
-  'w-[200px] h-[20px]',
-  'w-[150px] h-[20px]',
-  'w-[100px] h-[20px]',
-]
+  "w-[300px] h-[20px]",
+  "w-[250px] h-[20px]",
+  "w-[200px] h-[20px]",
+  "w-[150px] h-[20px]",
+  "w-[100px] h-[20px]",
+];
 
 export default function App() {
   const {
@@ -52,7 +52,7 @@ export default function App() {
   const Content = useMarkdown(completion);
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center h-full">
+    <div className="flex flex-col gap-6 justify-center items-center h-full pb-2">
       <span className="fixed top-1 right-1">
         <ModeToggle />
       </span>
@@ -64,9 +64,11 @@ export default function App() {
           "pt-5 justify-around gap-6": completion,
         })}
       >
-        <h1 className="text-4xl font-bold">COSCUP 2023 feat. OpenAI 議程搜尋系統</h1>
+        <h1 className="text-4xl font-bold">
+          COSCUP 2023 feat. OpenAI 議程搜尋系統
+        </h1>
 
-        <label className='flex flex-col items-center gap-1'>
+        <label className="flex flex-col gap-1 items-center">
           <Input
             className="py-6 px-4 max-w-full text-2xl w-[300px]"
             placeholder="請輸入關鍵字"
@@ -82,17 +84,23 @@ export default function App() {
 
       {/* placeholder */}
       {isLoading && !completion && (
-        <div className="flex flex-col gap-2 justify-center animate-pulse max-w-[500px] w-full mx-auto">
+        <div className="flex flex-col gap-2 justify-center mx-auto w-full animate-pulse max-w-[500px]">
           {/* randomize text placeholder */}
-          {
-            new Array(Math.floor(Math.random() * 3) + 5).fill(0).map((i, index) => {
-              const randomLengthClass = randomPlaceLengthClasses[Math.floor(Math.random() * randomPlaceLengthClasses.length)]
+          {new Array(Math.floor(Math.random() * 3) + 5)
+            .fill(0)
+            .map((i, index) => {
+              const randomLengthClass =
+                randomPlaceLengthClasses[
+                Math.floor(Math.random() * randomPlaceLengthClasses.length)
+                ];
 
               return (
-                <div className={`bg-gray-300 rounded-lg ${randomLengthClass}`} key={`placeholder-${index}`} />
-              )
-            })
-          }
+                <div
+                  className={`bg-gray-300 rounded-lg ${randomLengthClass}`}
+                  key={`placeholder-${index}`}
+                />
+              );
+            })}
         </div>
       )}
 
@@ -101,6 +109,41 @@ export default function App() {
           <Content />
         </div>
       )}
+
+      {/* floating footer to the bottom */}
+      <div className="flex fixed bottom-1 flex-col gap-2 justify-center items-center w-full">
+        <div className="flex gap-2 justify-center items-center">
+          <span className="text-sm text-muted-foreground">
+            <a
+              href="https://github.com/Yukaii/coscup-session-openai"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          </span>
+
+          <span className="text-sm text-muted-foreground">
+            <a
+              href="https://coscup.org/2023/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              COSCUP 2023
+            </a>
+          </span>
+
+          <span className="text-sm text-muted-foreground">
+            <a
+              href="https://yukai.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              My Blog
+            </a>
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
