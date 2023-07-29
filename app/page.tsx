@@ -78,10 +78,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-full flex-col items-center justify-center gap-6 px-1 pb-2 sm:px-0">
-      <span className="fixed right-1 top-1">
+    <div className="container flex h-full flex-col gap-6 px-4 py-12 pt-[120px]">
+      <span className="fixed right-4 top-4">
         <ModeToggle />
       </span>
+
+      <h1 className="text-center text-2xl font-bold dark:text-white md:text-4xl">COSCUP 2023 x OpenAI 議程搜尋系統</h1>
 
       <form
         onSubmit={handleSubmit}
@@ -91,27 +93,25 @@ export default function App() {
           "pt-5 justify-around gap-6": completion,
         })}
       >
-        <h1 className="text-4xl font-bold">COSCUP 2023 x OpenAI 議程搜尋系統</h1>
-
         <label className="flex flex-col items-center gap-1">
-          <div className="relative">
+          <div className="mb-4 text-center">
             <Input
-              className="w-[300px] max-w-full px-4 py-6 text-2xl"
+              className="w-[300px] max-w-full px-4 py-6 text-2xl md:w-[600px]"
               placeholder="請輸入關鍵字"
               value={input}
               onChange={handleInputChange}
             />
 
-            <small className="absolute -right-2 top-[18px] translate-x-[100%] text-muted-foreground">
-              {(input || completion) && (
-                <Link className="text-sm underline" onClick={clear} href="#">
+            {(input || completion) && (
+              <div className="mt-2 text-center text-muted-foreground dark:text-gray-300">
+                <Link className="text-sm underline md:text-base" onClick={clear} href="#">
                   清除搜尋結果
                 </Link>
-              )}
-            </small>
+              </div>
+            )}
           </div>
 
-          <small className="text-muted-foreground">
+          <div className="text-lg text-muted-foreground dark:text-gray-300">
             來問問關於今年 COSCUP 議程的一些事吧！
             {!completion && !input && (
               <>
@@ -126,7 +126,7 @@ export default function App() {
                 </ul>
               </>
             )}
-          </small>
+          </div>
         </label>
       </form>
 
@@ -144,28 +144,29 @@ export default function App() {
       )}
 
       {completion && (
-        <div className="markdown-body max-h-[500px] w-full max-w-[800px] overflow-auto px-4">
+        <div className="markdown-body max-h-[500px] w-full max-w-[800px] overflow-auto px-4 dark:text-white">
           <Content />
         </div>
       )}
 
       {/* floating footer to the bottom */}
-      <div className="fixed bottom-1 flex w-full flex-col items-center justify-center gap-2">
+      <div className="fixed bottom-4 flex w-full flex-col items-center justify-center gap-2">
         <div className="flex items-center justify-center gap-2">
-          <span className="text-sm text-muted-foreground">
-            <Link href="https://coscup.org/2023/" target="_blank" rel="noopener noreferrer">
+          <span className="text-sm text-muted-foreground dark:text-gray-300">
+            <Link href="https://coscup.org/2023/" target="_blank" rel="noopener noreferrer" className="hover:underline">
               COSCUP 2023
-            </Link>
-          </span>
-
-          <span className="text-sm text-muted-foreground">
-            <Link href="https://github.com/Yukaii/coscup-session-openai" target="_blank" rel="noopener noreferrer">
+            </Link>{" "}
+            |{" "}
+            <Link
+              href="https://github.com/Yukaii/coscup-session-openai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
               GitHub
-            </Link>
-          </span>
-
-          <span className="text-sm text-muted-foreground">
-            <Link href="https://yukai.dev" target="_blank" rel="noopener noreferrer">
+            </Link>{" "}
+            |{" "}
+            <Link href="https://yukai.dev" target="_blank" rel="noopener noreferrer" className="hover:underline">
               {`Hi, I'm Yukai`}
             </Link>
           </span>
