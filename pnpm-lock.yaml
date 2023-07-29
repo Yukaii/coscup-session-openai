@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@radix-ui/react-checkbox': ^1.0.4
   '@radix-ui/react-dropdown-menu': ^2.0.5
   '@radix-ui/react-slot': ^1.0.2
   '@supabase/supabase-js': ^2.31.0
@@ -37,6 +38,7 @@ specifiers:
   unified: ^10.1.2
 
 dependencies:
+  '@radix-ui/react-checkbox': 1.0.4_daadhm4ohxobgnrt365as5bhny
   '@radix-ui/react-dropdown-menu': 2.0.5_daadhm4ohxobgnrt365as5bhny
   '@radix-ui/react-slot': 1.0.2_e74vmjybjy5dsfplslbsgtbvvi
   '@supabase/supabase-js': 2.31.0
@@ -364,6 +366,34 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.6
       '@radix-ui/react-primitive': 1.0.3_daadhm4ohxobgnrt365as5bhny
+      '@types/react': 18.2.17
+      '@types/react-dom': 18.2.7
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@radix-ui/react-checkbox/1.0.4_daadhm4ohxobgnrt365as5bhny:
+    resolution: {integrity: sha512-CBuGQa52aAYnADZVt/KBQzXrwx6TqnlwtcIPGtVt5JkkzQwMOLJjPukimhfKEr4GQNd43C+djUh5Ikopj8pSLg==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.6
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-compose-refs': 1.0.1_e74vmjybjy5dsfplslbsgtbvvi
+      '@radix-ui/react-context': 1.0.1_e74vmjybjy5dsfplslbsgtbvvi
+      '@radix-ui/react-presence': 1.0.1_daadhm4ohxobgnrt365as5bhny
+      '@radix-ui/react-primitive': 1.0.3_daadhm4ohxobgnrt365as5bhny
+      '@radix-ui/react-use-controllable-state': 1.0.1_e74vmjybjy5dsfplslbsgtbvvi
+      '@radix-ui/react-use-previous': 1.0.1_e74vmjybjy5dsfplslbsgtbvvi
+      '@radix-ui/react-use-size': 1.0.1_e74vmjybjy5dsfplslbsgtbvvi
       '@types/react': 18.2.17
       '@types/react-dom': 18.2.7
       react: 18.2.0
@@ -762,6 +792,20 @@ packages:
 
   /@radix-ui/react-use-layout-effect/1.0.1_e74vmjybjy5dsfplslbsgtbvvi:
     resolution: {integrity: sha512-v/5RegiJWYdoCvMnITBkNNx6bCj20fiaJnWtRkU18yITptraXjffz5Qbn05uOiQnOvi+dbkznkoaMltz1GnszQ==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.6
+      '@types/react': 18.2.17
+      react: 18.2.0
+    dev: false
+
+  /@radix-ui/react-use-previous/1.0.1_e74vmjybjy5dsfplslbsgtbvvi:
+    resolution: {integrity: sha512-cV5La9DPwiQ7S0gf/0qiD6YgNqM5Fk97Kdrlc5yBcrF3jyEZQwm7vYFqMo4IfeHgJXsRaMvLABFtd0OVEmZhDw==}
     peerDependencies:
       '@types/react': '*'
       react: ^16.8 || ^17.0 || ^18.0

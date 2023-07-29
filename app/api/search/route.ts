@@ -83,7 +83,9 @@ export async function POST(req: Request) {
 
   const documentIds = documents.map((doc: any) => doc.id as string);
   const sessionResponse = await supabaseClient.from("sessions").select("id,title,description").in("id", documentIds);
-  const sessions = sessionResponse.data || []
+
+  // Limit to 10 sessions
+  const sessions = (sessionResponse.data || []).slice(0, 10);
 
   console.log(sessions, 'sessions')
 
@@ -100,9 +102,9 @@ export async function POST(req: Request) {
     tokenCount += tokens.length;
 
     // Limit context to max 1500 tokens (configurable)
-    if (tokenCount > 2000) {
-      break;
-    }
+    // if (tokenCount > 2000) {
+    //   break;
+    // }
 
     contextText += `${content.trim()}\n===\n`;
   }
@@ -119,10 +121,10 @@ COSCUP, recommend or answer questions about the sessions. Meet the following req
 - Based on the user prompt language(English, 中文, or others), response will always be in English or 臺灣繁體中文.
 - The session is consist of https://coscup.org/2023/(zh-TW or en)/session/(SESSION_ID)
 - DO NOT generate sessions not in the list given.
-- The recommendation reason should be in the format of blockquote.
+- Pick as many sessions from related sessions as possible
 - The output format is as follows:
 
-- [session title](link): (session 的 summary, in english or 中文 based on user prompt language)
+- [session title](link): (summarize session description, in english or 中文 based on user prompt language)
 `,
     },
     {

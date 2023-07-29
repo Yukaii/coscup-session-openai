@@ -115,7 +115,7 @@ export default function App() {
 
           <small className="text-muted-foreground">
             來問問關於今年 COSCUP 議程的一些事吧！
-            {!isLoading && !completion && (
+            {!completion && !input && (
               <>
                 <br />
                 或是，試試以下幾種：
