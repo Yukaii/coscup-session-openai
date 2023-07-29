@@ -1,13 +1,9 @@
-import {
-  ChatCompletionRequestMessage,
-  Configuration,
-  OpenAIApi,
-} from "openai-edge";
 
 import { createClient } from "@supabase/supabase-js";
-import { encode } from "gpt-tokenizer";
-import { stripIndent } from "common-tags";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import { stripIndent } from "common-tags";
+import { encode } from "gpt-tokenizer";
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai-edge";
 
 const supbaseUrl = process.env.SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_KEY!;
@@ -51,22 +47,22 @@ export async function POST(req: Request) {
       `,
       },
     ],
-    temperature: 1
+    temperature: 1,
   });
 
   const extendedKeywords = await extendKeywordCompletionResponse.json().then((json) => {
-    console.log(json, 'json')
+    console.log(json, "json");
     const { choices } = json;
 
-    const keywords = choices?.[0].message?.content?.split(',') || []
+    const keywords = choices?.[0].message?.content?.split(",") || [];
 
-    return keywords || []
-  })
+    return keywords || [];
+  });
 
   // Generate a one-time embedding for the query itself
   const embeddingResponse = await openai.createEmbedding({
     model: "text-embedding-ada-002",
-    input: `${input} ${extendedKeywords.join(" ")}`
+    input: `${input} ${extendedKeywords.join(" ")}`,
   });
 
   const [{ embedding }] = (await embeddingResponse.json()).data;
@@ -87,7 +83,7 @@ export async function POST(req: Request) {
   // Limit to 10 sessions
   const sessions = (sessionResponse.data || []).slice(0, 10);
 
-  console.log(sessions, 'sessions')
+  console.log(sessions, "sessions");
 
   let tokenCount = 0;
   let contextText = "";
@@ -153,7 +149,6 @@ COSCUP, recommend or answer questions about the sessions. Meet the following req
     stream: true,
     temperature: 0, // Set to 0 for deterministic results
   });
-
 
   const stream = OpenAIStream(completionResponse);
   return new StreamingTextResponse(stream);
