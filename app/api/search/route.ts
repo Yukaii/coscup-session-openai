@@ -28,10 +28,45 @@ export async function POST(req: Request) {
   const { prompt } = await req.json();
   const input = prompt.replace(/\n/g, " ");
 
+  // extend some related keywords
+  const extendKeywordCompletionResponse = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "system",
+        content: stripIndent`
+        You are a AI assistant that helps people to find related sessions.
+        Understand user prompt and come up with more related keywords for searching.
+        Output as comma separated keywords in both English and 繁體中文. Do not output duplicate keywords.
+      `,
+      },
+      {
+        role: "user",
+        content: `
+        Question: """
+        ${prompt}
+        """
+
+        response as keywords:
+      `,
+      },
+    ],
+    temperature: 1
+  });
+
+  const extendedKeywords = await extendKeywordCompletionResponse.json().then((json) => {
+    console.log(json, 'json')
+    const { choices } = json;
+
+    const keywords = choices?.[0].message?.content?.split(',') || []
+
+    return keywords || []
+  })
+
   // Generate a one-time embedding for the query itself
   const embeddingResponse = await openai.createEmbedding({
     model: "text-embedding-ada-002",
-    input,
+    input: `${input} ${extendedKeywords.join(" ")}`
   });
 
   const [{ embedding }] = (await embeddingResponse.json()).data;
@@ -46,25 +81,28 @@ export async function POST(req: Request) {
     match_count: 10, // Choose the number of matches
   });
 
-  // const documentIds = documents.map((document) => document.id);
-  // const sessions = await supabaseClient.from("sessions").select("*").in("id", documentIds);
+  const documentIds = documents.map((doc: any) => doc.id as string);
+  const sessionResponse = await supabaseClient.from("sessions").select("id,title,description").in("id", documentIds);
+  const sessions = sessionResponse.data || []
 
   let tokenCount = 0;
   let contextText = "";
 
   // Concat matched documents
-  for (let i = 0; i < documents.length; i++) {
-    const document = documents[i];
-    const content = document.content;
+  for (let i = 0; i < sessions.length; i++) {
+    const session = sessions[i];
+
+    const content = `session_id: ${session.id}\n${session.title}\n---\n${session.description}\n`;
+
     const tokens = encode(content);
     tokenCount += tokens.length;
 
     // Limit context to max 1500 tokens (configurable)
-    if (tokenCount > 1500) {
+    if (tokenCount > 2000) {
       break;
     }
 
-    contextText += `${content.trim()}\n---\n`;
+    contextText += `${content.trim()}\n===\n`;
   }
 
   const messages: ChatCompletionRequestMessage[] = [
@@ -72,18 +110,17 @@ export async function POST(req: Request) {
       role: "system",
       content: stripIndent`
     You are a very enthusiastic open source developer who loves
-    attending COSCUP conferences! Given the following sections from the this year
-    COSCUP session list, answer the question using only that information,
-    outputted in markdown format. If you are unsure and the answer
-    is not explicitly written in the session, say
-
-    "Sorry, I don't know how to help with that." or "抱歉，我找不到相關的訊息".
-    Based on the user prompt language, response will be in either English or Tranditional Chinese.`,
+    attending COSCUP conferences! Given the following sessions from the this year
+    COSCUP, recommend or answer questions about the sessions.
+    outputted in markdown format. 
+    Based on the user prompt language, response will be in either English or 臺灣繁體中文.
+    The session link will be https://coscup.org/2023/zh-TW/session/SESSION_ID
+`,
     },
     {
       role: "assistant",
       content: `
-      Context sections:
+      related sessions:
       ${contextText}
     `,
     },
@@ -94,7 +131,7 @@ export async function POST(req: Request) {
     ${prompt}
     """
 
-    Answer as markdown:
+    response as markdown:
   `,
     },
   ];

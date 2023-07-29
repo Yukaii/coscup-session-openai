@@ -8,11 +8,11 @@ html, body {
 
 .markdown-body {
   ul li {
-    @apply list-disc list-inside;
+    @apply list-disc;
   }
 
   ol li {
-    @apply list-decimal list-inside;
+    @apply list-decimal;
   }
 }
 

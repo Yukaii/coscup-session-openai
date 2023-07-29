@@ -71,7 +71,7 @@ export default function App() {
         </label>
       </form>
 
-      {completion && <div className="px-4 w-full max-w-[800px] markdown-body">
+      {completion && <div className="px-4 w-full max-w-[800px] markdown-body max-h-[600px] overflow-auto">
         <Content />
       </div>
       }
