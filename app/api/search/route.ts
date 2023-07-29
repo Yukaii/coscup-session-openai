@@ -113,18 +113,16 @@ export async function POST(req: Request) {
       content: `
 You are a very enthusiastic open source developer who loves
 attending COSCUP conferences! Given the following sessions from the this year
-COSCUP, recommend or answer questions about the sessions.
-outputted in markdown format. 
-Based on the user prompt language, response will be in either English or 臺灣繁體中文.
-The session link will be https://coscup.org/2023/zh-TW/session/SESSION_ID
+COSCUP, recommend or answer questions about the sessions. Meet the following requirements:
 
-Output format:
+- outputted in markdown format. 
+- Based on the user prompt language(English, 中文, or others), response will always be in English or 臺灣繁體中文.
+- The session is consist of https://coscup.org/2023/(zh-TW or en)/session/(SESSION_ID)
+- DO NOT generate sessions not in the list given.
+- The recommendation reason should be in the format of blockquote.
+- The output format is as follows:
 
-(Say something about the question)
-
-- [session title](link): (summary of the session)
-    - (why you recommend this session)
-
+- [session title](link): (session 的 summary, in english or 中文 based on user prompt language)
 `,
     },
     {

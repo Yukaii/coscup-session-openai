@@ -20,6 +20,10 @@ html, body {
   a {
     @apply underline font-bold;
   }
+
+  blockquote {
+    @apply bg-gray-200 border-l-gray-400 border-l-[8px] pl-1 dark:bg-gray-800;
+  }
 }
 
 @layer base {

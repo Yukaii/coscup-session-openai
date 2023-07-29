@@ -59,12 +59,14 @@ export default function App() {
 
       <form
         onSubmit={handleSubmit}
-        className={clsx("flex gap-6", {
-          "items-center": !completion,
-          "pt-5 flex-col justify-around gap-6": completion,
+        className={clsx("flex flex-col gap-6", {
+          "justify-center": !completion,
+          "pt-5 justify-around gap-6": completion,
         })}
       >
-        <label>
+        <h1 className="text-4xl font-bold">COSCUP 2023 feat. OpenAI 議程搜尋系統</h1>
+
+        <label className='flex flex-col items-center gap-1'>
           <Input
             className="py-6 px-4 max-w-full text-2xl w-[300px]"
             placeholder="請輸入關鍵字"
@@ -80,7 +82,7 @@ export default function App() {
 
       {/* placeholder */}
       {isLoading && !completion && (
-        <div className="flex flex-col gap-2 justify-center animate-pulse">
+        <div className="flex flex-col gap-2 justify-center animate-pulse max-w-[500px] w-full mx-auto">
           {/* randomize text placeholder */}
           {
             new Array(Math.floor(Math.random() * 3) + 5).fill(0).map((i, index) => {
@@ -95,7 +97,7 @@ export default function App() {
       )}
 
       {completion && (
-        <div className="overflow-auto px-4 w-full max-w-[800px] markdown-body max-h-[600px]">
+        <div className="overflow-auto px-4 w-full max-w-[800px] markdown-body max-h-[500px]">
           <Content />
         </div>
       )}
