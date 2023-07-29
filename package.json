@@ -46,6 +46,8 @@
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@types/common-tags": "^1.8.1"
+    "@types/common-tags": "^1.8.1",
+    "@typescript-eslint/parser": "^6.2.0",
+    "eslint-plugin-tailwindcss": "^3.13.0"
   }
 }
