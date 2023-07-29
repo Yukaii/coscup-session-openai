@@ -85,6 +85,8 @@ export async function POST(req: Request) {
   const sessionResponse = await supabaseClient.from("sessions").select("id,title,description").in("id", documentIds);
   const sessions = sessionResponse.data || []
 
+  console.log(sessions, 'sessions')
+
   let tokenCount = 0;
   let contextText = "";
 
@@ -92,7 +94,7 @@ export async function POST(req: Request) {
   for (let i = 0; i < sessions.length; i++) {
     const session = sessions[i];
 
-    const content = `session_id: ${session.id}\n${session.title}\n---\n${session.description}\n`;
+    const content = `session_id: ${session.id}\n${session.title}\n---\n${session.description.slice(0, 500)}\n`;
 
     const tokens = encode(content);
     tokenCount += tokens.length;
@@ -108,13 +110,21 @@ export async function POST(req: Request) {
   const messages: ChatCompletionRequestMessage[] = [
     {
       role: "system",
-      content: stripIndent`
-    You are a very enthusiastic open source developer who loves
-    attending COSCUP conferences! Given the following sessions from the this year
-    COSCUP, recommend or answer questions about the sessions.
-    outputted in markdown format. 
-    Based on the user prompt language, response will be in either English or 臺灣繁體中文.
-    The session link will be https://coscup.org/2023/zh-TW/session/SESSION_ID
+      content: `
+You are a very enthusiastic open source developer who loves
+attending COSCUP conferences! Given the following sessions from the this year
+COSCUP, recommend or answer questions about the sessions.
+outputted in markdown format. 
+Based on the user prompt language, response will be in either English or 臺灣繁體中文.
+The session link will be https://coscup.org/2023/zh-TW/session/SESSION_ID
+
+Output format:
+
+(Say something about the question)
+
+- [session title](link): (summary of the session)
+    - (why you recommend this session)
+
 `,
     },
     {

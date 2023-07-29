@@ -7,12 +7,18 @@ html, body {
 }
 
 .markdown-body {
+  @apply text-lg;
+  
   ul li {
     @apply list-disc;
   }
 
   ol li {
     @apply list-decimal;
+  }
+
+  a {
+    @apply underline font-bold;
   }
 }
 
