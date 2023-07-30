@@ -6,6 +6,8 @@
 
 那大家就直接看扣看 Demo 吧
 
+![screenshot](./docs/images/demo-1.png)
+
 ## 關於實作
 
 - 丟 COSCUP 的 [session.json](https://coscup.org/2023/json/session.json) 給 Code Intepreter 分析，產生 Database SQL Schema，以及把 JSON 轉成 `.sql`，可以直接匯入資料庫的程式 
