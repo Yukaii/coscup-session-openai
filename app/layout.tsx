@@ -1,5 +1,6 @@
 import "./globals.scss";
 import { ThemeProvider } from "@/components/theme-provider";
+import Script from "next/script";
 
 export const metadata = {
   title: "COSCUP 2023 x OpenAI 議程搜尋系統",
@@ -13,6 +14,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
+
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-L2JCSR53DP" />
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-L2JCSR53DP');
+        `}
+        </Script>
       </body>
     </html>
   );
