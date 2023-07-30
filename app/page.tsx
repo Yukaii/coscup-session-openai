@@ -144,33 +144,29 @@ export default function App() {
       )}
 
       {completion && (
-        <div className="markdown-body max-h-[500px] w-full max-w-[800px] overflow-auto px-4 dark:text-white">
+        <div className="markdown-body mx-auto max-h-[500px] w-full max-w-[800px] overflow-auto pl-5 pr-4 dark:text-white">
           <Content />
         </div>
       )}
 
       {/* floating footer to the bottom */}
-      <div className="fixed bottom-4 flex w-full flex-col items-center justify-center gap-2">
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-sm text-muted-foreground dark:text-gray-300">
-            <Link href="https://coscup.org/2023/" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              COSCUP 2023
-            </Link>{" "}
-            |{" "}
-            <Link
-              href="https://github.com/Yukaii/coscup-session-openai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              GitHub
-            </Link>{" "}
-            |{" "}
-            <Link href="https://yukai.dev" target="_blank" rel="noopener noreferrer" className="hover:underline">
-              {`Hi, I'm Yukai`}
-            </Link>
-          </span>
-        </div>
+      <div className="fixed bottom-4 left-0 mx-auto w-full text-center text-sm text-muted-foreground dark:text-gray-300">
+        <Link href="https://coscup.org/2023/" target="_blank" rel="noopener noreferrer" className="hover:underline">
+          COSCUP 2023
+        </Link>
+        <span className="px-2">|</span>
+        <Link
+          href="https://github.com/Yukaii/coscup-session-openai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
+          GitHub
+        </Link>
+        <span className="px-2">|</span>
+        <Link href="https://yukai.dev" target="_blank" rel="noopener noreferrer" className="hover:underline">
+          {`Hi, I'm Yukai`}
+        </Link>
       </div>
     </div>
   );
