@@ -1,6 +1,7 @@
 import "./globals.scss";
-import { ThemeProvider } from "@/components/theme-provider";
 import Script from "next/script";
+
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata = {
   title: "COSCUP 2023 x OpenAI 議程搜尋系統",
