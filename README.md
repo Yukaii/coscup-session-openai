@@ -10,7 +10,7 @@
 
 ## 關於實作
 
-- 丟 COSCUP 的 [session.json](https://coscup.org/2023/json/session.json) 給 Code Intepreter 分析，產生 Database SQL Schema，以及把 JSON 轉成 `.sql`，可以直接匯入資料庫的程式 (看 [session-data] 資料夾)
+- 丟 COSCUP 的 [session.json](https://coscup.org/2023/json/session.json) 給 Code Interpreter 分析，產生 Database SQL Schema，以及把 JSON 轉成 `.sql`，可以直接匯入資料庫的程式 (看 [session-data] 資料夾)
 - 然後照著 Supabase 這篇文 [Storing OpenAI embeddings in Postgres with pgvector](https://supabase.com/blog/openai-embeddings-postgres-vector) 直接改
 - 本來要用 Supabase Functions 來弄，但因為 Timeout 問題，以及前端也需要點魔法，所以就搬到了 Vercel
 - 前端用 Shadcn UI/Tailwind/Next.js
